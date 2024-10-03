@@ -2,4 +2,23 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-color: aquamarine;
 }
+
+header h1{
+    background-color: rgb(0, 133, 241);
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+}
+
+
+.cosas{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
