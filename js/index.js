@@ -1,5 +1,11 @@
 // Piedra, Papel, Tijera  
 
+const resumenPartida={victorias:0 , nombre:"", rondas:1}
+const tabla=document.getElementById("tabla")
+
+const datosTabla=[]
+
+resumenPartida.nombre=prompt("Ingresa tu nombre")
 let jugador;
 let pc;
 
@@ -47,9 +53,12 @@ function ganoPc() {
 }
 
 do{
+    resumenPartida.rondas=ronda
 console.log ("-------------- " + ronda+ " ----------------")
 
     console.log ("tus puntos "+puntosJugador)
+    resumenPartida.victorias=puntosJugador
+    datosTabla.push(resumenPartida)
 
     console.log ("los puntos del pc son " +puntosPc)
 
@@ -88,5 +97,21 @@ else{
 };
 }
 
+
 } while ( jugador!=4){
 }
+datosTabla.forEach((el)=>{
+    tabla.innerHTML+=`
+    <tr>
+    <td>${el.nombre}</td>
+    <td>${el.victorias}</td>
+    <td>${el.rondas}</td>
+</tr>`
+    })
+/* se debe elegir la opcion 4 para ejecurtar la tabla */
+
+
+
+
+
+
