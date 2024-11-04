@@ -121,6 +121,8 @@ function reiniciarJuego (){
     puntajePc.innerHTML= puntosPc
     puntosJugador=0
     puntajeJugador.innerHTML= puntosJugador
+    ronda=0
+    contadorRondas.innerHTML=ronda
         tipoObjeto.style.visibility= 'visible'
         datosTabla.push(resumenPartida)
 }

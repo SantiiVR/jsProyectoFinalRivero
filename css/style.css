@@ -135,9 +135,6 @@ th {
     padding: 10px;
 }
 
-.disabled {
-    display: none
-}
 
 .jugadorNombre{
     display: flex;
