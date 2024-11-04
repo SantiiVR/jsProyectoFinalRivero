@@ -2,23 +2,147 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: aquamarine;
+}
+
+body {
+    background-color: rgb(110, 110, 110);
+    color: rgb(255, 247, 238);
 }
 
 header h1{
-    background-color: rgb(0, 133, 241);
-    
+    background-color: rgb(253, 88, 165);
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 1rem;
     font-size: 60px;
+    color: rgb(255, 247, 238);
 }
 
 
-.cosas{
+main{
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
 }
 
+.instrucciones{ 
+    margin-bottom: 1rem;
+    margin-left: 15px;
+    font-size: 30px;
+}
+
+.marcador {
+    background-color: rgb(253, 88, 165);
+    padding: 10px;
+    border-radius: 1rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+
+}
+
+.marcador .nombre{
+    position: absolute;
+    color: rgb(255, 247, 238);
+    background-color: rgb(110, 110, 110);
+    line-height: 1;
+    padding: .5rem;
+    border-radius: .5rem;
+    border: 2px solid rgb(253, 88, 165);
+}
+
+.rondas{
+    margin-bottom: 2rem;
+    border-radius: .5rem;
+    border: 2px  solid rgb(253, 88, 165);
+    padding: .5rem;
+}
+
+.marcador .nombreJugador{
+    right: 100%;
+}
+
+.marcador .nombreComputadora{
+    left: 100%;
+}
+
+.marcador .puntos{
+    font-size: 25px;
+}
+
+.elegiTuArma {
+    margin-bottom: 2rem;
+}
+.elegiTuArma h2{
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: .5rem;
+
+}
+
+.armas {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.arma {
+    font-size: 5rem;
+    background-color: rgb(255, 247, 238);
+    border: 0;
+    padding: .5rem;
+    border-radius: .5rem;
+    cursor: pointer;
+}
+
+.mensaje{
+    margin-bottom: 2rem;
+    line-height: 1.8rem;
+}
+
+.mensaje .eleccion {
+    color: (110, 110, 110);
+    background-color: rgb(253, 88, 165);
+    border-radius: .25rem;
+    padding-inline: .25rem;
+
+}
+
+.btn{
+    border: 0;
+    line-height: 1;
+    background-color: rgb(255, 247, 238);
+    color: rgb(110, 110, 110);
+    font-size: 1rem;
+    padding: .5rem;
+    border-radius: .5rem;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+
+table{
+    background-color: rgb(253, 88, 165);
+    font-size: 20px;
+}
+
+th {
+    padding: 10px;
+}
+
+.disabled {
+    display: none
+}
+
+.jugadorNombre{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(253, 88, 165);
+    padding: 15px;
+    font-size: 1rem;
+}
