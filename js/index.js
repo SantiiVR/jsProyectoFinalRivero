@@ -36,6 +36,7 @@ const puntajePc = document.getElementById ("puntosComputadora")
 const contadorRondas = document.getElementById ("ronda")
 const tipoObjeto = document.getElementById ("elegiTuArma")
 const reinicio = document.getElementById("reiniciar")
+const reiniciarTabla = document.getElementById("reinicioTabla")
 
 
 
@@ -111,9 +112,34 @@ if (puntosJugador === 5 || puntosPc === 5) {
     if (puntosPc === 5) {
         instrucciones.innerHTML = "La pc gano"
     } 
-    
-    
-    reiniciar.addEventListener("click", reiniciarJuego);
+    //TODO: hacer funcion de nombre
+
+
+    Swal.fire({
+      title: "Escribi tu nombre",
+      input: "text",
+      confirmButtonText: "Guardar",
+      showConfirmButton: true,
+      allowOutsideClick: false,
+      allowEscapeKey : false,
+      showLoaderOnConfirm: true,
+      preConfirm: (inputValue) => {
+
+        Recods.saveData({
+            jugador:inputValue,
+            ronda
+        })
+
+
+
+      },
+    })
+
+
+
+    reinicio.addEventListener("click", reiniciarJuego);
+
+
 }
 
 function reiniciarJuego (){
@@ -124,7 +150,9 @@ function reiniciarJuego (){
     ronda=0
     contadorRondas.innerHTML=ronda
         tipoObjeto.style.visibility= 'visible'
-        datosTabla.push(resumenPartida)
+        // datosTabla.push(resumenPartida)
+        instrucciones.innerHTML = "Quien llegue a 5 puntos gana"
+
 }
 }
 
@@ -158,96 +186,44 @@ resumenPartida.victorias=puntosJugador
 
 
 
-/*
-function eleccion (jugador){
-switch (jugador) {
-    case "1":
-        return "Piedra"
-        break;
-    case "2":
-        return "Papel"
-        break;
-    
-    case "3":
-        return "Tijera"
-        break;
-
-        case "4":
-            return "Fin de juego"
-            break;
-
-    default:
-        return "selecciona una opcion valida"
-        break;
-}
-}
-
-function ganaJugador(){
-    puntosJugador++
-}
-function ganoPc() {
-    puntosPc++
-}
-
-do{
-    resumenPartida.rondas=ronda
-console.log ("-------------- " + ronda+ " ----------------")
-
-    console.log ("tus puntos "+puntosJugador)
-    resumenPartida.victorias=puntosJugador
-    datosTabla.push(resumenPartida)
-
-    console.log ("los puntos del pc son " +puntosPc)
-
-jugador = prompt ("Elije: 1-Piedra, 2-Papel, 3-Tijera 4-cerrar");
-console.log("tu eleccion fue: "+ eleccion (jugador))
-
-if (jugador==="1" || jugador==="2" || jugador==="3"){
-    ronda++
-    pc = aleatoria(); 
-console.log("La pc eligio: " + eleccion (pc))
 
 
 
-if (jugador == pc){
-    console.log("Empate")
-}
-else if (jugador==1 && pc==3){
-    ganaJugador();
-    console.log("Ganaste");
 
-}
-else if (jugador==2 && pc==1){
-    ganaJugador();
-    console.log("Ganaste")
-
-} 
-else if (jugador==3 && pc==2){
-    ganaJugador();
-    console.log("Ganaste")
-}
-
-else{
-    ganoPc();
-    console.log("Perdiste");
-    
-};
-}
+class Recods{
+    static getData(){
+      return JSON.parse(localStorage.getItem("partidas"))
+  
+    }
+     static saveData(partidaActual){
+      const partidas=this.getData() || [];
+      partidaActual.id = partidas.length + 1;
+       partidas.push(partidaActual)
+      localStorage.setItem('partidas', JSON.stringify(partidas));
+    }
+  
+    static deleteData(id){
+     localStorage.setItem("partidas",JSON.stringify([]))
+  
+    }
+  
+  
+  }
+  
 
 
-} while ( jugador!=4){
-}
-*/
-datosTabla.forEach((el)=>{
+  
+  
+const datos=Recods.getData()
+datos.forEach((datos)=>{
     tabla.innerHTML+=`
     <tr>
-    <td>${el.nombre}</td>
-    <td>${el.victorias}</td>
-    <td>${el.rondas}</td>
+    <td>${datos.jugador}</td>
+    <td>${datos.ronda}</td>
     </tr>`
     })
-/* se debe elegir la opcion 4 para ejecurtar la tabla */
 
 
+    reiniciarTabla.addEventListener("click", Recods.deleteData);
 
 
