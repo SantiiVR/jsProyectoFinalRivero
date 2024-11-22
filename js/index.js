@@ -41,6 +41,9 @@ const reiniciarTabla = document.getElementById("reinicioTabla")
 
 
 
+
+
+
 let botonObjetos = document.querySelectorAll(".arma")
 botonObjetos.forEach(boton =>{
     boton.addEventListener("click", jugar)
@@ -108,6 +111,7 @@ if (puntosJugador === 5 || puntosPc === 5) {
 
     if (puntosJugador === 5) {
         instrucciones.innerHTML = "Ganaste el juego"
+        pedirNombre()
     }
     if (puntosPc === 5) {
         instrucciones.innerHTML = "La pc gano"
@@ -115,22 +119,6 @@ if (puntosJugador === 5 || puntosPc === 5) {
     //TODO: hacer funcion de nombre
 
 
-    Swal.fire({
-        title: "Escribi tu nombre",
-        input: "text",
-        confirmButtonText: "Guardar",
-        showConfirmButton: true,
-        allowOutsideClick: false,
-        allowEscapeKey : false,
-        showLoaderOnConfirm: true,
-        preConfirm: (inputValue) => {
-
-        Recods.saveData({
-            jugador:inputValue,
-            ronda
-        })
-},
-    })
 
 
 
@@ -147,7 +135,6 @@ function reiniciarJuego (){
     ronda=0
     contadorRondas.innerHTML=ronda
         tipoObjeto.style.visibility= 'visible'
-        // datosTabla.push(resumenPartida)
         instrucciones.innerHTML = "Quien llegue a 5 puntos gana"
 
 }
@@ -199,23 +186,51 @@ class Recods{
         localStorage.setItem('partidas', JSON.stringify(partidas));
     }
 
-    static deleteData(id){
+    static deleteData(){
         localStorage.setItem("partidas",JSON.stringify([]))
     }}
 
 
+function mostrarDatosTabla(datos){
 
 
-const datos=Recods.getData()
-datos.forEach((datos)=>{
-    tabla.innerHTML+=`
-    <tr>
-    <td>${datos.jugador}</td>
-    <td>${datos.ronda}</td>
-    </tr>`
+    datos.forEach((datos)=>{
+        tabla.innerHTML+=`
+        <tr>
+        <td>${datos.jugador}</td>
+        <td>${datos.ronda}</td>
+        </tr>`
+        })
+}
+
+
+
+    reiniciarTabla.addEventListener("click", () => {
+    Recods.deleteData()
+    tabla.innerHTML=""
+    }
+    );
+
+
+function pedirNombre(){
+    
+    Swal.fire({
+        title: "Escribi tu nombre",
+        input: "text",
+        confirmButtonText: "Guardar",
+        showConfirmButton: true,
+        allowOutsideClick: false,
+        allowEscapeKey : false,
+        showLoaderOnConfirm: true,
+        preConfirm: (inputValue) => {
+
+        Recods.saveData({
+            jugador:inputValue.toUpperCase(),
+            ronda
+        })
+        tabla.innerHTML=""
+        const datos=Recods.getData()
+        mostrarDatosTabla(datos)
+},
     })
-
-
-    reiniciarTabla.addEventListener("click", Recods.deleteData);
-// corregir: se requiere recargar la pagina para mostrar resultados
-
+}
