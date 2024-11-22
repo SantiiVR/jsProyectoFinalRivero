@@ -116,23 +116,20 @@ if (puntosJugador === 5 || puntosPc === 5) {
 
 
     Swal.fire({
-      title: "Escribi tu nombre",
-      input: "text",
-      confirmButtonText: "Guardar",
-      showConfirmButton: true,
-      allowOutsideClick: false,
-      allowEscapeKey : false,
-      showLoaderOnConfirm: true,
-      preConfirm: (inputValue) => {
+        title: "Escribi tu nombre",
+        input: "text",
+        confirmButtonText: "Guardar",
+        showConfirmButton: true,
+        allowOutsideClick: false,
+        allowEscapeKey : false,
+        showLoaderOnConfirm: true,
+        preConfirm: (inputValue) => {
 
         Recods.saveData({
             jugador:inputValue,
             ronda
         })
-
-
-
-      },
+},
     })
 
 
@@ -192,28 +189,23 @@ resumenPartida.victorias=puntosJugador
 
 class Recods{
     static getData(){
-      return JSON.parse(localStorage.getItem("partidas"))
-  
+    return JSON.parse(localStorage.getItem("partidas"))
+
     }
-     static saveData(partidaActual){
-      const partidas=this.getData() || [];
-      partidaActual.id = partidas.length + 1;
-       partidas.push(partidaActual)
-      localStorage.setItem('partidas', JSON.stringify(partidas));
+        static saveData(partidaActual){
+        const partidas=this.getData() || [];
+        partidaActual.id = partidas.length + 1;
+        partidas.push(partidaActual)
+        localStorage.setItem('partidas', JSON.stringify(partidas));
     }
-  
+
     static deleteData(id){
-     localStorage.setItem("partidas",JSON.stringify([]))
-  
-    }
-  
-  
-  }
-  
+        localStorage.setItem("partidas",JSON.stringify([]))
+    }}
 
 
-  
-  
+
+
 const datos=Recods.getData()
 datos.forEach((datos)=>{
     tabla.innerHTML+=`
@@ -225,5 +217,5 @@ datos.forEach((datos)=>{
 
 
     reiniciarTabla.addEventListener("click", Recods.deleteData);
-
+// corregir: se requiere recargar la pagina para mostrar resultados
 
